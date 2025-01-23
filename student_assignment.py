@@ -16,10 +16,11 @@ def hw02_1(q1_pdf):
     # parameters to split the text.
     spiltter = CharacterTextSplitter(chunk_overlap = 0)
     # Split the last page
-    chunks_of_last_page = spiltter.split_documents([docs[pages - 1]])
-    print(f"chunks_of_last_page: {chunks_of_last_page}")
+    chunks = spiltter.split_documents(docs)
+    last_chunk = chunks[len(chunks) - 1]
+    print(f"last chunk: {last_chunk}")
 
-    return chunks_of_last_page
+    return last_chunk
 
 def hw02_2(q2_pdf):
     result_chunks = []
