@@ -34,7 +34,7 @@ def hw02_2(q2_pdf):
     # Merge pages to a single text
     full_content = ""
     for doc in docs:
-        full_content += doc.page_content
+        full_content += (doc.page_content + "\n")
 
     # print(f"full_content: \n{full_content}\n")
 
@@ -56,11 +56,11 @@ def hw02_2(q2_pdf):
 
     # Split chapter paragraph into sessions and put them to total_chunks
     total_chunks = []
-    session_separators = [r"(?:\n|^|\s*)第\s+[0-9]+(?:-[0-9]+)?\s+條.*\n"]
+    session_separators = [r"(?:\n|^)第\s+[0-9]+(?:-[0-9]+)?\s+條.*\n"]
     session_splitter = RecursiveCharacterTextSplitter(
         separators = session_separators,
         keep_separator = "start",
-        chunk_size = 50,
+        chunk_size = 0,
         chunk_overlap = 0,
         is_separator_regex = True)
     for chapter in chapter_paragraphs:
