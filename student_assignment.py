@@ -17,8 +17,8 @@ def hw02_1(q1_pdf):
     spiltter = CharacterTextSplitter(chunk_overlap = 0)
     # Split the last page
     chunks = spiltter.split_documents(docs)
-    last_chunk = chunks[len(chunks) - 1]
-    print(f"last chunk: {last_chunk}")
+    last_chunk = chunks[-1]
+    print(f"last chunk: {last_chunk.metadata}")
 
     return last_chunk
 
@@ -53,7 +53,7 @@ def hw02_2(q2_pdf):
     result_chunks.append(title_chunk)
 
     # Split remaining into chapter paragraphs
-    chapter_paragraph_separators = [r"(?:\n|^|\s+)第\s*[一二三四五六七八九十]+\s*章.*\n"]
+    chapter_paragraph_separators = [r"(?:\n|^|\s+)第\s*(?:[一二三四五六七八九十百千萬]+|零)\s*章.*\n"]
     chapter_paragraph_splitter = RecursiveCharacterTextSplitter(
         separators = chapter_paragraph_separators,
         keep_separator = "start",
