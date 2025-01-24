@@ -7,10 +7,12 @@ q2_pdf = "勞動基準法.pdf"
 
 
 def hw02_1(q1_pdf):
+    print(f"\nhw02_1:")
+
+    # Load pdf
     loader = PyPDFLoader(q1_pdf)
     docs = loader.load() # Load as pages
-    pages = len(docs)
-    print(f"pages: {pages}")
+    print(f"pages: {len(docs)}")
 
     # This example shows CharacterTextSplitter doesn't use chunk_size and chunk_overlap
     # parameters to split the text.
@@ -23,6 +25,8 @@ def hw02_1(q1_pdf):
     return last_chunk
 
 def hw02_2(q2_pdf):
+    print(f"\nhw02_2:")
+
     # Load pdf
     loader = PyPDFLoader(q2_pdf)
     docs = loader.load() # Load as pages
@@ -48,8 +52,7 @@ def hw02_2(q2_pdf):
         print("Fail to parse title")
         return 0
 
-    print(f"chapter_paragraphs (+title): \n{len(chapter_paragraphs)}\n")
-    # print(f"title_chunk: \n{title_chunk}\n")
+    print(f"chapter_paragraphs (+title): {len(chapter_paragraphs)}")
 
     # Split chapter paragraph into sessions and put them to total_chunks
     total_chunks = []
@@ -64,8 +67,8 @@ def hw02_2(q2_pdf):
         session_chunks = session_splitter.split_text(chapter)
         total_chunks.extend(session_chunks)
 
-    print(f"\ntotal_chunks: {len(total_chunks)}")
-    for index, chunk in enumerate(total_chunks):
-        print(f"chunk: {index + 1}:{chunk}\n{'='*20}\n")
+    print(f"total_chunks: {len(total_chunks)}")
+    # for index, chunk in enumerate(total_chunks):
+    #     print(f"chunk: {index + 1}:{chunk}\n{'='*20}\n")
 
     return len(total_chunks)
