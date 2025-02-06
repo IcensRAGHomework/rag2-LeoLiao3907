@@ -26,13 +26,31 @@
   2. 使用 **PyPDFLoader** 套件的load()方法讀取 **`OpenSourceLicenses.pdf`** 的文本內容。
   3. 使用 **CharacterTextSplitter** 將文本以`頁`為單位，分割為多個chunks。
 * **提示**：
-  1. 可以用 **split_text** 或是 **split_documents** 得到分割後的chunk。
-  2. 注意 **CharacterTextSplitter** 的參數配置：
+  1. 系統會用另外一份相似結構的文件來驗證你的方法。
+  2. 可以用 **split_text** 或是 **split_documents** 得到分割後的chunk。
+  3. 注意 **CharacterTextSplitter** 的參數配置：
       - chunk_overlap=0
       - schunk_size, separator 可以用預設值，也可以自行調整
 * **預期輸出**：
-  - 請回傳最後一個chunk物件，裡面預期會包含檔名、頁數跟內文
-
+  - 分割後的chunks會在一個list物件中
+  - 請回傳該list最後一個element，裡面預期會包含檔名、頁數跟內文
+  - 例如：
+   ````markdown
+   page_content='** Patent Grant **
+   ● A patent grant in the Apache 2.0 license means that the licensor (the person or
+   entity who owns the software and the license) grants the licensee (the person or
+   entity who uses the software under the license) a permission to use any patents
+   that cover the software or its derivatives. This permission is given for free,
+   worldwide, and irrevocably, as long as the licensee follows the terms and
+   conditions of the license. The patent grant protects the licensee from being sued
+   by the licensor or its contributors for patent infringement, as long as the licensee
+   does not sue anyone else for patent infringement related to the software.
+   ● Example:
+   ○ Google grants a patent license to anyone who uses TensorFlow, an open source machine learning
+   framework. The patent license covers any patents owned or controlled by Google or its contributors
+   that are related to TensorFlow.
+   Open Source Licenses' metadata={'source': 'OpenSourceLicenses.pdf', 'page': 4}
+   ````
 ---
 
 ### 第二題：探索不同文本分割策略對產生的資料切片的差異
@@ -43,17 +61,21 @@
   1. 使用 **PyPDFLoader** 套件的load()方法讀取 **`勞動基準法.pdf`** 的文本內容。
   2. 使用 **RecursiveCharacterTextSplitter** 將文本分割為多個chunks。
   3. 請試著將`每一章，每一條`切分成單獨的一個個chunk
+  4. 第一章以上的部分請試著切成單獨一個chunk
 * **提示**：
   1. 請實作方法 `hw02_2(q2_pdf)`，用於完成這個任務。
-  2. 可以用 **split_text** 或是 **split_documents** 得到分割後的chunk。
-  3. 注意 **RecursiveCharacterTextSplitter** 的配置參數：
+  2. 系統會用另外一份相似結構的文件來驗證你的方法。
+  3. 可以用 **split_text** 或是 **split_documents** 得到分割後的chunk。
+  4. 注意 **RecursiveCharacterTextSplitter** 的配置參數：
       - chunk_overlap=0
-      - chunk_size, separator 可以自行調整
+      - chunk_size, separator 等可以自行嘗試調整
+      - regular expression 是你的好幫手
 * **預期輸出**：
   - 請回傳得到的`chunks數量`，預期會是一個整數物件
 * **切分範例**：
-  - 以第一頁為例，預期會是這樣切分
+  - 以"勞動基準法"第一頁為例，預期會是這樣切分
   - ![Alt text](./chunks_example.png "Optional title")
+  - "勞動基準法"切分後預期會有111個chunks
 
 ---
 
